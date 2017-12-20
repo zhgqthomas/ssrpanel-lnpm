@@ -1,0 +1,81 @@
+version: '3'
+
+services:
+  nginx:
+    restart: always
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # app
+      - ./app/src:/usr/share/nginx/html
+      # nginx configs
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
+      # certificates
+      - ./nginx/ca/server.crt/:/etc/nginx/server.crt:ro
+      - ./nginx/ca/server.key/:/etc/nginx/server.key:ro
+    network:
+      - frontend
+    depends_on:
+      - ssrpanel
+
+  ssrpanel:
+    build: ./SSRPanel
+    container_name: ssrpanel
+    depends_on:
+      - mysql
+      - redis
+    network:
+      - frontend
+      - backend
+    environment:
+      - MIGRATION=true
+      - ADMIN_EMAIL=
+      - ADMIN_PASS=
+
+      - APP_LANG=en
+
+      - AUTH_SALT=
+      - AUTH_PASSWORD_ENCRYPTION_TYPE=bcrypt
+
+      - DB_HOST=mysql
+      - DB_DATABASE=sspanel
+      - DB_USERNAME=root
+      - DB_PASSWORD=sspanel
+
+      - REDIS_HOST=redis
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=sspanel
+      - MYSQL_DATABASE=sspanel
+    volumes:
+      - mysql_data:/var/lib/mysql:Z
+    network:
+      - backend
+
+  redis:
+    restart: always
+    image: redis:latest
+    container_name: redis
+    command:
+    - --loglevel warning
+    volumes:
+      - redis_data:/var/lib/redis:Z
+    network:
+      - backend
+
+
+
+network:
+  frontend:
+  backend:
+
+volumes:
+  mysql_data:
+  redis_data:
