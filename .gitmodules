@@ -1,0 +1,4 @@
+[submodule "ssrpanel"]
+	path = SSRPanel
+	url = git@github.com:zhgqthomas/SSRPanel.git
+	branch = docker
