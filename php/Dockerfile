@@ -1,4 +1,4 @@
-FROM php:7.1.12-fpm-alpine3.4
+FROM php:7.1-fpm
 
 RUN set -xe \
     && echo "构建依赖" \
