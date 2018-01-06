@@ -13,7 +13,7 @@ services:
       - ./SSRPanel:/usr/share/nginx/html
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
-    network:
+    networks:
       - frontend
     depends_on:
       - php
@@ -30,7 +30,7 @@ services:
     depends_on:
       - mysql
       - redis
-    network:
+    networks:
       - frontend
       - backend
     environment:
@@ -63,7 +63,7 @@ services:
       - MYSQL_DATABASE=sspanel
     volumes:
       - mysql_data:/var/lib/mysql:Z
-    network:
+    networks:
       - backend
 
   redis:
@@ -74,12 +74,12 @@ services:
       - --loglevel warning
     volumes:
       - redis_data:/var/lib/redis:Z
-    network:
+    networks:
       - backend
 
 
 
-network:
+networks:
   frontend:
   backend:
 
