@@ -51,6 +51,6 @@ RUN set -xe \
 
 WORKDIR /usr/share/nginx/html
 
-COPY ./php/docker-entrypoint.sh /usr/share/nginx/html/entrypoint.sh
+COPY docker-entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["/usr/share/nginx/html/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
