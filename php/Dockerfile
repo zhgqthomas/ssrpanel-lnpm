@@ -50,7 +50,3 @@ RUN set -xe \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/share/nginx/html
-
-COPY docker-entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
