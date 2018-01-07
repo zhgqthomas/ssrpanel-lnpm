@@ -1,4 +1,4 @@
 [submodule "ssrpanel"]
 	path = SSRPanel
-	url = git@github.com:zhgqthomas/SSRPanel.git
+	url = https://github.com/zhgqthomas/ssrpanel-lnpm.git
 	branch = docker
