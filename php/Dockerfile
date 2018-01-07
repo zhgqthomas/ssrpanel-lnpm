@@ -49,8 +49,6 @@ RUN set -xe \
     && rm -rf /var/cache/apt/* \
     && rm -rf /var/lib/apt/lists/*
 
-COPY ./php/php.conf /usr/local/etc/php/conf.d/php.conf
-
 WORKDIR /usr/share/nginx/html
 
 COPY ./php/docker-entrypoint.sh /usr/share/nginx/html/entrypoint.sh
