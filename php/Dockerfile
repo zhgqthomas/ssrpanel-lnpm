@@ -51,7 +51,4 @@ RUN set -xe \
 
 WORKDIR /usr/share/nginx/html
 
-COPY docker-entrypoint.sh /entrypoint.sh
-
-CMD ["/entrypoint.sh"]
 
