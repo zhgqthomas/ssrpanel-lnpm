@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo "Install ss-panel"
 php composer.phar install
 php artisan key:generate
